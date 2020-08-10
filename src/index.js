@@ -16,17 +16,17 @@ const fixtures = {
 
 app.use(jsonParser);
 
-app.get("/users", (req, res) => {
+app.get("/api/users", (req, res) => {
   res.send(fixtures.users);
 });
 
-app.get("/users/:id", (req, res) => {
+app.get("/api/users/:id", (req, res) => {
   const user = fixtures.users.find((u) => u.id === parseInt(req.params.id, 10));
 
   res.send(user);
 });
 
-app.post("/users", (req, res) => {
+app.post("/api/users", (req, res) => {
   if (req.body.name) {
     const newUserId = fixtures.user[fixtures.users.length - 1].id + 1;
     const user = { id: newUserId, name: req.body.name };
@@ -37,7 +37,7 @@ app.post("/users", (req, res) => {
   }
 });
 
-app.delete("/users/:id", (req, res) => {
+app.delete("/api/users/:id", (req, res) => {
   let deleted = false;
   fixtures.user = fixtures.user.filter((u) => {
     if (u.id !== req.params.id) {
